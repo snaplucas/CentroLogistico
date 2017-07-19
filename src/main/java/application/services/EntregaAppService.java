@@ -2,6 +2,7 @@ package application.services;
 
 import application.dto.EntregaDto;
 import application.dto.PassoDto;
+import application.exceptions.EntregaException;
 import application.interfaces.IEntregaAppService;
 import domain.model.entities.Entrega;
 import domain.model.entities.Passo;
@@ -24,9 +25,12 @@ public class EntregaAppService implements IEntregaAppService {
     }
 
     @Override
-    public List<PassoDto> obterPassos(String entregaId) {
+    public List<PassoDto> obterPassos(String entregaId) throws EntregaException {
         Entrega entrega = entregaService.obterEntrega(entregaId);
-        return entrega.definirPassos().stream().map(this::toDto).collect(Collectors.toList());
+        if (entrega != null) {
+            return entrega.definirPassos().stream().map(this::toDto).collect(Collectors.toList());
+        }
+        throw new EntregaException("Entrega não encotrada");
     }
 
     private Entrega toDomainModel(EntregaDto entregaDto) {

@@ -2,6 +2,7 @@ package port.adapter.entrypoints;
 
 import application.dto.EntregaDto;
 import application.dto.PassoDto;
+import application.exceptions.EntregaException;
 import application.interfaces.IEntregaAppService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class EntregaController {
     }
 
     @GetMapping("/{entregaid}")
-    public List<PassoDto> obterPassos(@PathVariable String entregaid) {
+    public List<PassoDto> obterPassos(@PathVariable String entregaid) throws EntregaException {
         return entregaAppService.obterPassos(entregaid);
     }
 }
