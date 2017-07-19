@@ -1,4 +1,6 @@
 package port.adapter.repository;
 
-public class EntregaRepository {
+import domain.model.interfaces.IEntregaRepository;
+
+public class EntregaRepository implements IEntregaRepository {
 }

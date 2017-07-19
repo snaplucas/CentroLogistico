@@ -1,4 +1,4 @@
 package port.adapter.configuration;
 
-public class FactoryConfiguration {
+public class FactoryConfig {
 }
