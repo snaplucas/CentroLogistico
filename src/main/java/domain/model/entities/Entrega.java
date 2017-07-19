@@ -1,6 +1,7 @@
 package domain.model.entities;
 
 import domain.model.enumeradores.Zona;
+import org.springframework.data.annotation.Transient;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -11,6 +12,7 @@ public class Entrega {
     private String id;
     private String veiculo;
     private List<Pacote> pacotes;
+    @Transient
     private List<Passo> passos;
 
     public Entrega() {
@@ -42,19 +44,19 @@ public class Entrega {
         this.pacotes = pacotes;
     }
 
-    public List<Passo> calcularPassos() {
+    public List<Passo> definirPassos() {
         pacotes.sort(Comparator.comparingDouble(Pacote::getPeso).reversed());
-        resolvePassos(pacotes, Zona.ABASTECIMENTO, Zona.TRANSFERENCIA, Zona.CAMINHAO);
+        resolverPassos(pacotes, Zona.ABASTECIMENTO, Zona.TRANSFERENCIA, Zona.CAMINHAO);
         return passos;
     }
 
-    private void resolvePassos(List<Pacote> pacotes, Zona inicial, Zona auxiliar, Zona destino) {
+    private void resolverPassos(List<Pacote> pacotes, Zona inicial, Zona auxiliar, Zona destino) {
         if (pacotes.size() == 1) {
             passos.add(new Passo(pacotes.get(0).getId(), inicial, destino));
         } else {
-            resolvePassos(pacotes.subList(1, pacotes.size()), inicial, destino, auxiliar);
+            resolverPassos(pacotes.subList(1, pacotes.size()), inicial, destino, auxiliar);
             passos.add(new Passo(pacotes.get(0).getId(), inicial, destino));
-            resolvePassos(pacotes.subList(1, pacotes.size()), auxiliar, inicial, destino);
+            resolverPassos(pacotes.subList(1, pacotes.size()), auxiliar, inicial, destino);
         }
     }
 }

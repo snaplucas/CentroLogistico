@@ -26,7 +26,7 @@ public class EntregaTest {
         List<Pacote> pacotes = Arrays.asList(pacote1, pacote2, pacote3);
 
         entrega.setPacotes(pacotes);
-        List<Passo> passos = entrega.calcularPassos();
+        List<Passo> passos = entrega.definirPassos();
         Assert.assertEquals(passos.size(), 7);
     }
 }
