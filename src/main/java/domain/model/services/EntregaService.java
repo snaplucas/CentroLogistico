@@ -16,4 +16,9 @@ public class EntregaService implements IEntregaService {
     public void adicionarEntrega(Entrega entrega) {
         entregaRepository.adicionarEntrega(entrega);
     }
+
+    @Override
+    public Entrega obterEntrega(String id) {
+        return entregaRepository.obterEntrega(id);
+    }
 }

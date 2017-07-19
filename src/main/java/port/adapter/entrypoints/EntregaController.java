@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -23,13 +22,13 @@ public class EntregaController {
     }
 
     @PostMapping
-    public ResponseEntity inserirEntrega(@RequestBody  EntregaDto entregaDto) {
+    public ResponseEntity inserirEntrega(@RequestBody EntregaDto entregaDto) {
         entregaAppService.adicionarEntrega(entregaDto);
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
 
-    @GetMapping("/{entregaId}/passo")
-    public List<PassoDto> obterPassos(@PathVariable("id") String id) {
-        return new ArrayList<>();
+    @GetMapping("/{entregaid}")
+    public List<PassoDto> obterPassos(@PathVariable String entregaid) {
+        return entregaAppService.obterPassos(entregaid);
     }
 }

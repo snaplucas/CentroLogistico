@@ -16,4 +16,9 @@ public class EntregaRepository implements IEntregaRepository {
     public void adicionarEntrega(Entrega entrega) {
         mongoTemplate.save(entrega);
     }
+
+    @Override
+    public Entrega obterEntrega(String id) {
+        return mongoTemplate.findById(id, Entrega.class);
+    }
 }
