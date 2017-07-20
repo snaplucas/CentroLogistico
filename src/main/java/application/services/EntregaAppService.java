@@ -7,6 +7,7 @@ import application.interfaces.IEntregaAppService;
 import domain.model.entities.Entrega;
 import domain.model.entities.Passo;
 import domain.model.interfaces.IEntregaService;
+import port.adapter.specification.validation.ValidationResult;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,8 +21,12 @@ public class EntregaAppService implements IEntregaAppService {
     }
 
     @Override
-    public void adicionarEntrega(EntregaDto entregaDto) {
-        entregaService.adicionarEntrega(toDomainModel(entregaDto));
+    public ValidationResult adicionarEntrega(EntregaDto entregaDto) throws EntregaException {
+        Entrega entrega = toDomainModel(entregaDto);
+        if (entrega.isValid()) {
+            entregaService.adicionarEntrega(entrega);
+        }
+        return entrega.getValidationResult();
     }
 
     @Override

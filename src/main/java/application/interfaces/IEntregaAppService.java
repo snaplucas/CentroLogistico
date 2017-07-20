@@ -3,12 +3,13 @@ package application.interfaces;
 import application.dto.EntregaDto;
 import application.dto.PassoDto;
 import application.exceptions.EntregaException;
+import port.adapter.specification.validation.ValidationResult;
 
 import java.util.List;
 
 public interface IEntregaAppService {
 
-    void adicionarEntrega(EntregaDto entregaDto);
+    ValidationResult adicionarEntrega(EntregaDto entregaDto) throws EntregaException;
 
     List<PassoDto> obterPassos(String entregaId) throws EntregaException;
 }

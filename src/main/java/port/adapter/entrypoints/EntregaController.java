@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import port.adapter.specification.validation.ValidationResult;
 
 import java.util.List;
 
@@ -23,9 +24,12 @@ public class EntregaController {
     }
 
     @PostMapping
-    public ResponseEntity inserirEntrega(@RequestBody EntregaDto entregaDto) {
-        entregaAppService.adicionarEntrega(entregaDto);
-        return ResponseEntity.ok(HttpStatus.CREATED);
+    public ResponseEntity<ValidationResult> inserirEntrega(@RequestBody EntregaDto entregaDto) throws EntregaException {
+        ValidationResult validationResult = entregaAppService.adicionarEntrega(entregaDto);
+        if (validationResult.getErros().size() == 0) {
+            return new ResponseEntity<>(validationResult, HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(validationResult, HttpStatus.OK);
     }
 
     @GetMapping("/{entregaid}")

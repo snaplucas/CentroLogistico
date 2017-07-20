@@ -1,7 +1,9 @@
 package domain.model.entities;
 
 import domain.model.enumeradores.Zona;
+import domain.model.validations.EntregaValidation;
 import org.springframework.data.annotation.Transient;
+import port.adapter.specification.validation.ValidationResult;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -14,6 +16,8 @@ public class Entrega {
     private List<Pacote> pacotes;
     @Transient
     private List<Passo> passos;
+    @Transient
+    private ValidationResult validationResult;
 
     public Entrega() {
         this.pacotes = new ArrayList<>();
@@ -43,6 +47,16 @@ public class Entrega {
     public void setPacotes(List<Pacote> pacotes) {
         this.pacotes = pacotes;
     }
+
+    public ValidationResult getValidationResult() {
+        return validationResult;
+    }
+
+    public boolean isValid() {
+        validationResult = new EntregaValidation().Validar(this);
+        return validationResult.isValid();
+    }
+
 
     public List<Passo> definirPassos() {
         pacotes.sort(Comparator.comparingDouble(Pacote::getPeso).reversed());
