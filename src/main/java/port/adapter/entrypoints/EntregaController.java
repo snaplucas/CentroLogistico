@@ -24,7 +24,7 @@ public class EntregaController {
     }
 
     @PostMapping
-    public ResponseEntity<ValidationResult> inserirEntrega(@RequestBody EntregaDto entregaDto) throws EntregaException {
+    public ResponseEntity<ValidationResult> inserirEntrega(@RequestBody EntregaDto entregaDto) {
         ValidationResult validationResult = entregaAppService.adicionarEntrega(entregaDto);
         if (validationResult.getErros().size() == 0) {
             return new ResponseEntity<>(validationResult, HttpStatus.CREATED);

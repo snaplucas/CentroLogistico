@@ -21,7 +21,7 @@ public class EntregaAppService implements IEntregaAppService {
     }
 
     @Override
-    public ValidationResult adicionarEntrega(EntregaDto entregaDto) throws EntregaException {
+    public ValidationResult adicionarEntrega(EntregaDto entregaDto) {
         Entrega entrega = toDomainModel(entregaDto);
         if (entrega.isValid()) {
             entregaService.adicionarEntrega(entrega);

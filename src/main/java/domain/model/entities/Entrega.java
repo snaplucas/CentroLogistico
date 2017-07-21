@@ -14,8 +14,10 @@ public class Entrega {
     private String id;
     private String veiculo;
     private List<Pacote> pacotes;
+
     @Transient
     private List<Passo> passos;
+
     @Transient
     private ValidationResult validationResult;
 
@@ -56,7 +58,6 @@ public class Entrega {
         validationResult = new EntregaValidation().Validar(this);
         return validationResult.isValid();
     }
-
 
     public List<Passo> definirPassos() {
         pacotes.sort(Comparator.comparingDouble(Pacote::getPeso).reversed());

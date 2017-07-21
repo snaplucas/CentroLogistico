@@ -1,6 +1,8 @@
 spring:
   main:
     banner-mode: "off"
+  application:
+    name: centro-logistico
 
 server:
   port: 8888

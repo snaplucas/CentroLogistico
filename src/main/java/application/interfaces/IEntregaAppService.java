@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface IEntregaAppService {
 
-    ValidationResult adicionarEntrega(EntregaDto entregaDto) throws EntregaException;
+    ValidationResult adicionarEntrega(EntregaDto entregaDto);
 
     List<PassoDto> obterPassos(String entregaId) throws EntregaException;
 }
