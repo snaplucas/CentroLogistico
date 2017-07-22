@@ -1,14 +1,12 @@
 package application.dto;
 
-import domain.model.entities.Pacote;
-
 import java.util.List;
 
 public class EntregaDto {
 
     private String id;
     private String veiculo;
-    private List<Pacote> pacotes;
+    private List<PacoteDto> pacotes;
 
     public String getId() {
         return id;
@@ -26,11 +24,11 @@ public class EntregaDto {
         this.veiculo = veiculo;
     }
 
-    public List<Pacote> getPacotes() {
+    public List<PacoteDto> getPacotes() {
         return pacotes;
     }
 
-    public void setPacotes(List<Pacote> pacotes) {
+    public void setPacotes(List<PacoteDto> pacotes) {
         this.pacotes = pacotes;
     }
 }

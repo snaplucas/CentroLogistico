@@ -1,10 +1,12 @@
 package application.services;
 
 import application.dto.EntregaDto;
+import application.dto.PacoteDto;
 import application.dto.PassoDto;
 import application.exceptions.EntregaException;
 import application.interfaces.IEntregaAppService;
 import domain.model.entities.Entrega;
+import domain.model.entities.Pacote;
 import domain.model.entities.Passo;
 import domain.model.interfaces.IEntregaService;
 import port.adapter.specification.validation.ValidationResult;
@@ -40,7 +42,7 @@ public class EntregaAppService implements IEntregaAppService {
 
     private Entrega toDomainModel(EntregaDto entregaDto) {
         Entrega entrega = new Entrega();
-        entrega.setPacotes(entregaDto.getPacotes());
+        entrega.setPacotes(entregaDto.getPacotes().stream().map(this::toDomainModel).collect(Collectors.toList()));
         entrega.setId(entregaDto.getId());
         entrega.setVeiculo(entregaDto.getVeiculo());
         return entrega;
@@ -52,5 +54,12 @@ public class EntregaAppService implements IEntregaAppService {
         passoDto.setPara(passo.getPara());
         passoDto.setPacoteId(passo.getPacoteId());
         return passoDto;
+    }
+
+    private Pacote toDomainModel(PacoteDto pacoteDto) {
+        Pacote pacote = new Pacote();
+        pacote.setId(pacoteDto.getId());
+        pacote.setPeso(pacoteDto.getPeso());
+        return pacote;
     }
 }
